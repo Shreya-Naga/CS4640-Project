@@ -12,18 +12,29 @@
         <link rel="stylesheet" href="styles/yourlistings.css">
      </head>  
      <body>
-        <div class="topbar">
-            <span>Apartment Search and Review</span>
+        <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
+            <div class="title">
+                <span>Apartment Search and Review</span>
+            </div>
+            <div class="nav-container">
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">Apartment Search</a></li>
+                        <li><a href="yourlistings.html">My Profile</a></li>
+                        <li><a href="yourlistings.html">My Listings</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div>
             <header>
                 <div class="logo">
-                    <img src="images/logo.png" alt="logo">
+                    <img src="images/logo.png" alt="apartment search logo">
                 </div>
                 <div class="searchbar">
-                    <input type="search" placeholder="City, State">
+                    <input type="search" placeholder="Search Your Listings">
                 </div>
-                <a href="index.html">
+                <a href="yourlistings.html">
                     <div class="logo">
                         <img src="images/logo.png" alt="logo">
                     </div>
@@ -32,7 +43,7 @@
         </div>
         <div class="actions">
             <button type="button">Add a Listing</button> 
-            <button type="button">Find Other Listings</button> 
+            <button type="button" onclick = "window.location.href='index.html';">Find Other Listings</button> 
         </div>
         
         <main>

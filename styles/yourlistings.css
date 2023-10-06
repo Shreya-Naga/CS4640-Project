@@ -96,3 +96,48 @@ input[type=search] {
     padding-right: 10px;
     margin: 20px;
 }
+
+.topbar {
+    background-color: lightgray;
+    color: rgb(104, 197, 255);
+    flex-direction: column;
+}
+
+span {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 15px;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+li a { 
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
