@@ -1,7 +1,7 @@
 <!DOCTYPE html>
  <html lang="en">
      <head>
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/main.css"> <!-- link to the main.css style sheet -->
 
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,39 +13,76 @@
         <title>Apartment Search and Review</title>
      </head>  
      <body>
-        <div class="topbar">
-            <span>Apartment Search and Review</span>
-        </div>
-        <div>
-            <header>
-                <div class="logo">
-                    <img src="images/logo.png" alt="logo">
-                </div>
-                <div class="searchbar">
-                    <input type="search" placeholder="City, State">
-                </div>
-                <div class="profile">
-                    <img class="profile" src="images/profile.png" alt="logo">
-                </div>
-            </header>
-        </div>
-        <nav>
-            <div class="navbar">
-                <ul class="nav-list">
-                    <li><a href="index.html">Home Page</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="involvements.html">Involvements</a></li>
-                    <li><a href="travel.html">Travel</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+        <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
+            <div class="title">
+                <span>Apartment Search and Review</span>
             </div>
-        </nav>
-        <h3>Description</h3>
-        <p>Paragraph</p>
-        <main>
-            <h1>Welcome to My Website</h1>
-        </main>
-       
+            <div class="nav-container">
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">Apartment Search</a></li>
+                        <li><a href="about.html">My Profile</a></li>
+                        <li><a href="involvements.html">My Listings</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <header>
+            <div class="logo"> <!-- this is the site's logo -->
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
+                <input type="search" placeholder="City, State">
+            </div>
+            <div class="profile"> <!-- the user's profile picture -->
+                <img class="profile" src="images/profile.png" alt="logo">
+            </div>
+        </header>
+        <div class="user-selections">
+            <div class="rooms-dropdown"> <!-- user's can choose how many bedrooms they want their apartment search to have -->
+                <label for="bedrooms">Bedrooms:</label>
+                <select name="rooms-number" id="rooms-number">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5+">5+</option>
+                </select>
+            </div>
+            <div class="rent-dropdown"> <!-- user's can choose their preferred rent -->
+                <label for="rent">Rent/Month:</label>
+                <select name="rent" id="rent">
+                    <option value="500">Less Than 500</option>
+                    <option value="1000">Less Than 1000</option>
+                    <option value="1500">Less Than 1500</option>
+                    <option value="2000">Less Than 2000</option>
+                    <option value="2500">Less Than 2500</option>
+                    <option value="2500+">2500+</option>
+                </select>
+            </div>
+            <div class="amenities-dropdown"> <!-- user's can choose their preferred amenities -->
+                <label for="amenities">Amenities:</label>
+                <select name="amenities"  id="amenities" >
+                    <option value="A/C">A/C</option>
+                    <option value="Heating">Heating</option>
+                    <option value="Dishwasher">Dishwasher</option>
+                    <option value="Washer">Washer</option>
+                    <option value="Dryer">Dryer</option>
+                    <option value="Gym">Gym</option>
+                    <option value="Pool">Pool</option>
+                </select>
+            </div>
+            <div class="rating-dropdown"> <!-- user's can choose their preferred average rating -->
+                <label for="rating">Average Rating:</label>
+                <select name="rating" id="rating" >
+                    <option value="1">Greater Than 1</option>
+                    <option value="2">Greater Than 2</option>
+                    <option value="3">Greater Than 3</option>
+                    <option value="4">Greater Than 4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
         <div>
             <footer class="primary-footer">
                 <small class="copyright">&copy; 2023 Shreya Nagabhirava. All rights reserved.</small>
