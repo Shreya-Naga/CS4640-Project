@@ -3,9 +3,30 @@ div {
     font-style: Arial, Verdana;
 }
 
+ul.nav-list {
+    display: flex;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: sans-serif;
+}
+
 .topbar {
     background-color: lightgray;
     color: rgb(104, 197, 255);
+    flex-direction: column;
+    text-align: center;
+}
+
+li a { 
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
 }
 
 img.listingimg {
@@ -19,14 +40,22 @@ img {
     width: 80px;
     height: 80px;
 }
-
+nav {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 15px;
+}
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 25px;
+    /* padding: 25px; */
 }
 
 p.title{
@@ -48,7 +77,7 @@ div.actions{
     align-items: center; /* Horizontally center the content (alternative) */
 }
 
-div.actions > button{
+button.action{
     color: rgb(104, 197, 255);
     background-color: transparent;
     border-radius: 20px;
@@ -75,7 +104,7 @@ div.listing{
     background-color: lightblue;
     padding: 20px;
     margin: 20px;
-    width: 20vw;
+    width: 19vw;
     height: 400px;
     border-radius: 20px;
 }
