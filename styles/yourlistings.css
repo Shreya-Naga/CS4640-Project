@@ -11,8 +11,8 @@ div {
 img.listingimg {
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    height: 500px;
+    width: 15vw;
+    height: 20vw;
 }
 
 img {
@@ -38,9 +38,7 @@ p.locn{
     font-size: smaller;
 
 }
-p.list-desc{
 
-}
 
 div.actions{ 
     text-align: center;
@@ -77,7 +75,7 @@ div.listing{
     background-color: lightblue;
     padding: 20px;
     margin: 20px;
-    width: 700px;
+    width: 20vw;
     height: 400px;
     border-radius: 20px;
 }
@@ -85,11 +83,6 @@ div.listing{
 .profile {
     width: 60px;
     height: 60px;
-}
-
-.searchbar {
-    display: flex;
-    justify-content: center;
 }
 
 input[type=search] {

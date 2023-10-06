@@ -15,33 +15,35 @@
         <div>
             
             <header>
-                <h1>Apartment Website</h1>
-                <nav>
-                    <a class="nav-item nav-link active" href="./index.html">home</a>
-                    <a class="nav-item nav-link" href="./about.html">about</a>
-                    <a class="nav-item nav-link" href="./contact.html">contact</a>
-                </nav>
+                <a href="index.html">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="logo">
+                    </div>
+                </a>
             </header>
         </div>
         
         <main>
             <h1>Listing Information</h1>
 
-            <div>
-
-                <div class="topleft">
-                    <img src="Untitled.jpg" alt="apartment">
+            <div class="modal">
+                <div class="tophalf">
+                    <div class="topleft">
+                        <img src="Untitled.jpg" alt="apartment">
+                    </div>
+    
+                    <div class="topright">
+                        <p>LISTING TITLE</p>
+                        <p class="desc">LISTING DESCTIPTION</p>
+                    </div>
                 </div>
 
-                <div class="topright">
-                    <p>LISTING TITLE</p>
-                    <p class="desc">LISTING DESCTIPTION</p>
-                </div>
-
-            </div>
-            <p id="addr">address</p>
+                <div class="bottomhalf">
+                    <p id="addr">City of Charlottesville
+                        PO Box 911
+                        Charlottesville, VA 22902</p>
             <div class="container">
-                <div class="b">
+                <div class="d">
                     <table class="amenities">
                         <tr>                    
                             <th>Amenities</th>
@@ -63,7 +65,7 @@
 
                 </div>
 
-                <div class="b">
+                <div class="d">
                     <table class="amenities">
                         <tr>                    
                             <th>Amenities</th>
@@ -83,21 +85,31 @@
                     </table>     
                 </div>
 
-                <div class="b" id="info">
+                <div class="d">
                     <table class="pbb">
                         <tr>                    
-                            <td>rent price</td>
+                            <td>Rent Price: $1750/month</td>
                         </tr>                    
                         <tr>                    
-                            <td># bathrooms</td>
+                            <td># Bathrooms: 4</td>
                         </tr>                    
                         <tr>                    
-                            <td># bedrooms</td>
+                            <td># Bedrooms: 4</td>
                         </tr>                    
 
                     </table>
                 </div>
             </div>
+                </div>
+
+
+            <div class="actions">
+                <a href="yourlistings.html">
+                    <button type="button">Back</button>
+                </a> 
+            </div>
+            </div>
+            
         </main>
        
         <div>
