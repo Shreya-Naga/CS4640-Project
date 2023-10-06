@@ -1,0 +1,71 @@
+div.b{
+    display: flex;
+    padding: 100px;
+}
+
+div.topleft{
+    width: 50%; 
+    float:left;
+}
+
+div.topright{
+    width: 50%; 
+    float:right;
+}
+
+p.desc {
+    height: 150px;
+    width: 50%;
+    overflow: auto;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#addr {
+    padding: 10px;
+}
+
+div.b#info{
+    width: 50%;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    align-items: center;   /* <---- NEW    */
+    width: 100%;
+    height: 50%;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+
+}
+
+main {
+    width: 70%;
+    margin: auto;
+    border-radius: 15px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    border: 1px solid black;
+
+}
+
+
+div.container {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    flex: 1;
+    margin: 5px;
+
+}
+
+table.amenities, th, .pbb {
+    border: 1px solid black;
+    width: 100%;
+}

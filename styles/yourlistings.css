@@ -1,0 +1,29 @@
+div {
+    display: flex;
+    font-style: Arial, Verdana;
+}
+
+.topbar {
+    background-color: lightgray;
+    color: rgb(104, 197, 255);
+}
+
+img {
+    width: 80px;
+    height: 80px;
+}
+
+
+logo {
+    display: flex;
+}
+
+.profile {
+    width: 60px;
+    height: 60px;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+}
