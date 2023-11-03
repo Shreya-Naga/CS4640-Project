@@ -2,8 +2,6 @@
 
 class Controller {
 
-    private $categories = [];
-
     private $input = [];
 
     /**
@@ -23,21 +21,42 @@ class Controller {
      */
     public function run() {
         // Get the command
-        $command = "login";
+        $command = "showLogin";
         if (isset($this->input["command"]))
             $command = $this->input["command"];
 
-        switch($command) {
-            case "login":
-                $this->login();
-            case "search":
-                $this->showSearch();
-            case "logout":
-                $this->logout();
-            default:
-                $this->showLogin();
-                break;
+        if($command == "showLogin") {
+            $this->showLogin();
         }
+        elseif($command == "login") {
+            $this->login();
+        }
+        elseif($command == "validateSearch") {
+            $this->validateSearch();
+        }
+        elseif($command == "logout") {
+            $this->logout();
+        }
+        else {
+            $this->showLogin();
+        }
+        
+        // switch($command) {
+        //     case "showLogin":
+        //         echo "Hello Show Login";
+        //     case "login":
+        //         echo "Hello Login";
+
+        //         $this->login();
+        //     case "validateSearch":
+        //         echo "Hello search";
+
+        //         $this->validateSearch();
+        //     case "logout":
+        //         echo "Hello logout";
+
+        //         $this->logout();
+        // };
     }
 
      /**
@@ -55,24 +74,27 @@ class Controller {
         if(isset($_POST["name"])) {
             $_SESSION["name"] = $_POST["name"];
         }
-
-        $_SESSION["guesses"] = 0;
+        $this->showSearch();
     }
 
     public function validateSearch() {
-        if (isset($_POST["search"])) {
-            if ($_POST["search"] == "^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$") {
-                $_SESSION["city"] = $_POST["search"];
+        $message = "";
+        if (isset($_POST["location"])) {
+            if (preg_match("^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$^", $_POST["location"])) {
+                $_SESSION["city"] = $_POST["location"];
+                $message =  "This is a valid search.";
             }
             else {
-                echo "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                $message = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
             }
         }
+        $_SESSION['searchMessage'] = $message;
+        include("templates/search.php");        
     }
 
     public function showSearch() {
-        $name = $_SESSION["name"];
-        include("search.php");        
+        $message = "";
+        include("templates/search.php");        
     }
 
     /**
