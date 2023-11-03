@@ -1,8 +1,10 @@
 <?php
-    session_start();
+    //session_start();
 	require("../postgres.php");
     require("./db/login_db.php");
     $authAttempt = 0;
+    $wrong_credential_msg = "";
+    $username_exists_msg = "";
     if($_SERVER['REQUEST_METHOD']=='POST'){
         if(!empty($_POST['actionBtn']) && $_POST['actionBtn']=="LOGIN"){
             $auth = check_login($_POST['name'], $_POST['password']);
@@ -13,7 +15,7 @@
                     $wrong_credential_msg = "";
                     header("Location: http://localhost:8080/CS4640-Project/");
                     exit();
-                }else{
+                } else{
                     $wrong_credential_msg = "invalid creds";
                 }
             }
@@ -47,20 +49,20 @@
     </head>
 
     <body style="background-color:lightskyblue">
-        <div class="shadow rounded-3 mx-auto w-25" style="background-color:white; margin-top:10%;">
+        <div class="shadow rounded-3 mx-auto w-50" style="background-color:white; margin-top:10%;">
             <h2 class="mt-3 pt-4 text-center">Apartment Finder Login</h2>
-            <form name="mainForm" method="post" class="mt-5 px-2"> 
+            <form action="?command=login" name="mainForm" method="post" class="mt-5 px-2"> 
                 <div class="row mb-3 mx-3" style="color:lightskyblue">
                     Username:
-                    <input type="text" class="form-control" name="name" required />    
+                    <input type="text" class="form-control" id="name" name="name" required />    
                 </div>  
                 <div class="row mb-3 mx-3" style="color:lightskyblue">
                     Password:
-                    <input type="password" class="form-control" name="password" required />        
+                    <input type="password" class="form-control" id="password" name="password" required />        
                 </div>  
                 <div class="mt-5 pb-4 mx-auto w-75 d-flex justify-content-evenly">
-                    <input type="submit" class="btn btn-primary" value="LOGIN" name="actionBtn" title="Login">
-                    <input type="submit" class="btn btn-primary" value="REGISTER" name="actionBtn" title="Register">
+                    <input type="submit" class="btn btn-primary mx-auto" value="LOGIN" name="actionBtn" title="Login">
+                    <input type="submit" class="btn btn-primary mx-auto" value="REGISTER" name="actionBtn" title="Register">
                 </div>
 
                 <p class="text-center fw-bold pb-3" style="color:red">

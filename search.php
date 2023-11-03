@@ -10,9 +10,9 @@
          <meta name="description" content="Apartment Search and Review">
          <meta name="keywords" content="Apartment Search and Apartment Review">
         <title>Apartment Search and Review</title>
-        <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/index.html -->
+        <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/search.html -->
      </head>  
-     <body>
+     <body style="background-color:white">
         <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
             <div class="title">
                 <span>Apartment Search and Review</span>
@@ -20,7 +20,7 @@
             <div class="nav-container">
                 <nav>
                     <ul class="nav-list">
-                        <li><a href="index.html">Apartment Search</a></li>
+                        <li><a href="search.php">Apartment Search</a></li>
                         <li><a href="yourlistings.html">My Profile</a></li>
                         <li><a href="yourlistings.html">My Listings</a></li>
                     </ul>
@@ -31,9 +31,12 @@
             <div class="logo"> <!-- this is the site's logo -->
                 <img src="images/logo.png" alt="apartment search logo">
             </div>
-            <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
-                <input type="search" placeholder="City, State">
-            </div>
+            <form action="?command=search" method="post">
+                <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
+                    <input type="search" name="location" placeholder="City, State">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
             <div class="profile"> <!-- the user's profile picture -->
                 <a href="yourlistings.html">
                     <img class="profile" src="images/profile.png" alt="logo">
