@@ -1,26 +1,22 @@
 <?php
+require("/opt/src/CS4640-Project/db/connection.php");
 
 class Controller {
 
-    private $categories = [];
+    private $connector;
 
-    private $input = [];
 
-    /**
-     * Constructor
-     */
     public function __construct($input) {
         session_start();
-        $this->input = $input;
+        $host = Config::$db["host"];
+        $user = Config::$db["user"];
+        $database = Config::$db["database"];
+        $password = Config::$db["pass"];
+        $port = Config::$db["port"];
+
+        $this->connector = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
     }
 
-    /**
-     * Run the server
-     *
-     * Given the input (usually $_GET), then it will determine
-     * which command to execute based on the given "command"
-     * parameter.  Default is the welcome page.
-     */
     public function run() {
         // Get the command
         $command = "login";
@@ -29,27 +25,27 @@ class Controller {
 
         switch($command) {
             case "login":
-                $this->login();
+                $this->showLogin();
+                break;
             case "search":
                 $this->showSearch();
+                break;
             case "logout":
                 $this->logout();
+                break;
             default:
                 $this->showLogin();
                 break;
         }
     }
 
-     /**
-     * Show the welcome page to the user.
-     */
+
     public function showLogin() {
+        $dbHandle = $this->connector;
         include("templates/login.php");
     }
 
-    /**
-     * Handle user registration and log-in
-     */
+
     public function login() {
 
         if(isset($_POST["name"])) {
@@ -72,12 +68,9 @@ class Controller {
 
     public function showSearch() {
         $name = $_SESSION["name"];
-        include("search.php");        
+        include("templates/search.php");        
     }
 
-    /**
-     * Log out the user
-     */
      public function logout() {
         session_destroy();
         session_start();

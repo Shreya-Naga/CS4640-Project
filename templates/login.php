@@ -1,19 +1,19 @@
 <?php
     //session_start();
-	require("../postgres.php");
-    require("./db/login_db.php");
+	// require("../postgres.php");
+    require("/opt/src/CS4640-Project/db/login_db.php");
     $authAttempt = 0;
     $wrong_credential_msg = "";
     $username_exists_msg = "";
     if($_SERVER['REQUEST_METHOD']=='POST'){
         if(!empty($_POST['actionBtn']) && $_POST['actionBtn']=="LOGIN"){
-            $auth = check_login($_POST['name'], $_POST['password']);
+            $auth = check_login($dbHandle, $_POST['name'], $_POST['password']);
             $authAttempt = 1;
             if($authAttempt){
                 if($auth){
                     $_SESSION['username'] = $_POST['name']; 
                     $wrong_credential_msg = "";
-                    header("Location: http://localhost:8080/CS4640-Project/");
+                    header("Location: http://localhost:8080/project/?command=search");
                     exit();
                 } else{
                     $wrong_credential_msg = "invalid creds";
@@ -21,15 +21,15 @@
             }
         }
         if (!empty($_POST['actionBtn']) && $_POST['actionBtn']=="REGISTER"){
-                $lookup = check_exist_username($_POST['name']);
+                $lookup = check_exist_username($dbHandle, $_POST['name']);
 
                 if($lookup){
                     $username_exists_msg="user exists";
                 }else{
-                    add_user($_POST['name'], $_POST['password']);
+                    add_user($dbHandle, $_POST['name'], $_POST['password']);
                     $_SESSION['username'] = $res['name'];
                     $username_exists_msg = "";
-                    header("Location: http://localhost:8080/CS4640-Project/");
+                    header("Location: http://localhost:8080/project/?command=search");
                     exit();
                 }
         }
