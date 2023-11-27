@@ -21,8 +21,8 @@
                 <nav>
                     <ul class="nav-list">
                         <li><a href="search.php">Apartment Search</a></li>
-                        <li><a href="yourlistings.html">My Profile</a></li>
-                        <li><a href="yourlistings.html">My Listings</a></li>
+                        <li><a href="newlisting.php">New Listing</a></li>
+                        <li><a href="yourlistings.php">My Listings</a></li>
                     </ul>
                 </nav>
             </div>
@@ -31,18 +31,22 @@
             <div class="logo"> <!-- this is the site's logo -->
                 <img src="images/logo.png" alt="apartment search logo">
             </div>
-            <form action="?command=search" method="post">
+            <form action="?command=validateSearch" method="post">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
                     <input type="search" name="location" placeholder="City, State">
-                    <button type="submit">Search</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </form>
+            
             <div class="profile"> <!-- the user's profile picture -->
                 <a href="yourlistings.html">
                     <img class="profile" src="images/profile.png" alt="logo">
                 </a>
             </div>
         </header>
+        <p class="text-center fw-bold pb-3" style="color:red">
+                <?php if($message != "") echo $message; ?>
+        </p> 
         <div class="user-selections">
             <div class="rooms-dropdown"> <!-- user's can choose how many bedrooms they want their apartment search to have -->
                 <label for="bedrooms">Bedrooms:</label>

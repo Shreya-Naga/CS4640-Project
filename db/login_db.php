@@ -12,7 +12,6 @@
     function check_login($dbHandle, $email, $password){
         $r = pg_query_params($dbHandle, "select email from person where email=$1 and password=crypt($2, person.password);", [$email, $password]);
         $a = pg_fetch_all($r);
-
         return $a;
     }
 ?>
