@@ -9,4 +9,10 @@
         $r = pg_query_params($dbHandle, "select * from listing", []);
         return json_encode(pg_fetch_all($r));
     }
+
+    function get_user_listing($dbHandle, $email){
+        $r = pg_query_params($dbHandle. "select * from person p inner join listing l 
+                                            on p.email=l.author_id where p.email=$1", [$email]);
+        return json_encode(pg_fetch_all($r));
+    }
 ?>
