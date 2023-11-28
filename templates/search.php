@@ -1,7 +1,7 @@
 <!DOCTYPE html>
  <html lang="en">
      <head>
-        <link rel="stylesheet" href="styles/main.css"> <!-- link to the main.css style sheet -->
+        <link rel="stylesheet" href="../styles/main.css"> <!-- link to the main.css style sheet -->
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -12,32 +12,33 @@
         <title>Apartment Search and Review</title>
         <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/search.html -->
         <style>
-            #message {
-                color: red;
+            #validationMessage {
                 font-weight: bold;
                 margin: 10px;
+                background-color: #ffcccc;
+                padding: 10px;
+                display: none;
             }
         </style>
         <script>
             function validateSearch() {
                 var input = document.getElementById("city").value;
                 var validationMessage = document.getElementById("validationMessage");
-
                 validationMessage.textContent = '';
 
-                    if (input !== "") {
-                        var regex = /^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$/;
-                        if regex.test(input) {
-                            sessionStorage.setItem("citySearch", input);
-                            validationMessage.textContent = "This is a valid search.";
-                        }
-                        else {
-                            validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
-                        }
-                    }
-                    else {
+                if (input !== "") {
+                    var regex = /^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$/;
+                    if (regex.test(input)) {
+                        sessionStorage.setItem("citySearch", input);
+                        validationMessage.textContent = "This is a valid search.";
+                        // validationMessage.style.background-color = #7cfc00;
+                    } else {
                         validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
                     }
+                } else {
+                    validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                }
+                validationMessage.style.display = validationMessage.textContent.trim() !== "" ? "block" : "none";
             }
         </script>
     </head>  
@@ -58,18 +59,18 @@
         </div>
         <header>
             <div class="logo"> <!-- this is the site's logo -->
-                <img src="images/logo.png" alt="apartment search logo">
+                <img src="../images/logo.png" alt="apartment search logo">
             </div>
             <form method="post">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
                     <input type="search" class="form-control" name="location" id="city" placeholder="City, State">
-                    <button type="submit" class="btn btn-primary" onclick="checkAnswer(); return false;">Search</button>
+                    <button type="submit" class="btn btn-primary" onclick="validateSearch(); return false;">Search</button>
                 </div>
             </form>
             
             <div class="profile"> <!-- the user's profile picture -->
                 <a href="yourlistings.html">
-                    <img class="profile" src="images/profile.png" alt="logo">
+                    <img class="profile" src="../images/profile.png" alt="logo">
                 </a>
             </div>
         </header>
@@ -122,28 +123,28 @@
         <div class="apartments">
             <div class="first-row">
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                         <p class="title">4 bedroom apartment</p>
                         <p class="locn">Charlottesville, VA</p>
                         <p>* _ _ _ _</p>
                         <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
@@ -152,28 +153,28 @@
             </div>
             <div class="second-row">
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
                 </div>
                 <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
