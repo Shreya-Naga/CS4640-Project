@@ -38,9 +38,9 @@ class Controller {
             case "newListing":
                 $this->newListing();
                 break;
-            case "validateSearch":
-                $this->validateSearch();
-                break;
+            // case "validateSearch":
+            //     $this->validateSearch();
+            //     break;
             case "logout":
                 $this->logout();
                 break;
@@ -64,16 +64,16 @@ class Controller {
 
 
 
-    public function validateSearch() {
-        if (isset($_POST["search"])) {
-            if ($_POST["search"] == "^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$") {
-                $_SESSION["city"] = $_POST["search"];
-            }
-            else {
-                echo "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
-            }
-        }
-    }
+    // public function validateSearch() {
+    //     if (isset($_POST["search"])) {
+    //         if ($_POST["search"] == "^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$") {
+    //             $_SESSION["city"] = $_POST["search"];
+    //         }
+    //         else {
+    //             echo "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+    //         }
+    //     }
+    // }
 
     public function showSearch($message="") {
         $name = $_SESSION["name"];

@@ -11,7 +11,36 @@
          <meta name="keywords" content="Apartment Search and Apartment Review">
         <title>Apartment Search and Review</title>
         <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/search.html -->
-     </head>  
+        <style>
+            #message {
+                color: red;
+                font-weight: bold;
+                margin: 10px;
+            }
+        </style>
+        <script>
+            function validateSearch() {
+                var input = document.getElementById("city").value;
+                var validationMessage = document.getElementById("validationMessage");
+
+                validationMessage.textContent = '';
+
+                    if (input !== "") {
+                        var regex = /^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$/;
+                        if regex.test(input) {
+                            sessionStorage.setItem("citySearch", input);
+                            validationMessage.textContent = "This is a valid search.";
+                        }
+                        else {
+                            validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                        }
+                    }
+                    else {
+                        validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                    }
+            }
+        </script>
+    </head>  
      <body style="background-color:white">
         <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
             <div class="title">
@@ -31,10 +60,10 @@
             <div class="logo"> <!-- this is the site's logo -->
                 <img src="images/logo.png" alt="apartment search logo">
             </div>
-            <form action="?command=validateSearch" method="post">
+            <form method="post">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
-                    <input type="search" name="location" placeholder="City, State">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <input type="search" class="form-control" name="location" id="city" placeholder="City, State">
+                    <button type="submit" class="btn btn-primary" onclick="checkAnswer(); return false;">Search</button>
                 </div>
             </form>
             
@@ -44,9 +73,7 @@
                 </a>
             </div>
         </header>
-        <p class="text-center fw-bold pb-3" style="color:red">
-                <?php if($message != "") echo $message; ?>
-        </p> 
+        <div id="validationMessage"></div>
         <div class="user-selections">
             <div class="rooms-dropdown"> <!-- user's can choose how many bedrooms they want their apartment search to have -->
                 <label for="bedrooms">Bedrooms:</label>
