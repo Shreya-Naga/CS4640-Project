@@ -6,6 +6,7 @@ class Controller {
 
     private $connector;
     private $input = [];
+    private $user_id = "";
 
     public function __construct($input) {
         session_start();
@@ -77,6 +78,7 @@ class Controller {
 
     public function showSearch($message="") {
         $name = $_SESSION["name"];
+        $dbHandle = $this->connector;
         include("templates/search.php");        
     }
 

@@ -1,3 +1,10 @@
+<?php
+    require("/opt/src/CS4640-Project/db/add_listing_db.php");
+
+    $listings = json_decode(get_listings($dbHandle), true);
+
+?>
+
 <!DOCTYPE html>
  <html lang="en">
      <head>
@@ -13,16 +20,16 @@
         <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/search.html -->
      </head>  
      <body style="background-color:white">
-        <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
+        <div class="topbar">
             <div class="title">
                 <span>Apartment Search and Review</span>
             </div>
             <div class="nav-container">
                 <nav>
                     <ul class="nav-list">
-                        <li><a href="search.php">Apartment Search</a></li>
-                        <li><a href="newlisting.php">New Listing</a></li>
-                        <li><a href="yourlistings.php">My Listings</a></li>
+                        <li><form action="?command=search" method="post"><button type="submit">Search</button></form></li>
+                        <li><form action="?command=newListing" method="post"><button type="submit">New Listing</button></form></li>
+                        <li><form action="?command=myListing" method="post"><button type="submit">My Listings</button></form></li>
                     </ul>
                 </nav>
             </div>
@@ -94,67 +101,31 @@
         </div>
         <div class="apartments">
             <div class="first-row">
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
+                <?php
+                    // print_r($listings[0]);
+
+                    foreach($listings as $l){
+                        echo '<div class="response">';
+                            echo '<img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">';
+                            echo '<p class="title">'.$l['title'].'</p>';
+                            echo '<p class="title">Rent: $'.$l['rent'].' # Bed: '.$l['num_bed'].' # Bath: '.$l['num_bath'].'</p>';
+                            echo '<p class="locn">'.$l['addr'].'</p>';
+                            echo '<p>* _ _ _ _</p>';
+                            echo '<p class="list-desc">Description: '.$l['dsc'].'</p>';
+                            echo '<p class="list-desc">Amenities: '.$l['amenities'].'</p>';
+                        echo '</div>';
+                    }
+                ?>
+                <!-- <div class="response">
                     <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-            </div>
-            <div class="second-row">
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
+                </div> -->
             </div>
         </div>
-        <br> <!-- carriage return -->
+        <br>
         <div>
             <footer class="primary-footer">
                 <small class="copyright">&copy; 2023 Shreya Nagabhirava. All rights reserved.</small>

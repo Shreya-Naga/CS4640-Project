@@ -1,3 +1,34 @@
+<?php
+    require("/opt/src/CS4640-Project/db/add_listing_db.php");
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if(!empty($_POST['actionBtn'])){
+            if($_POST['actionBtn']=="Submit Listing"){
+                $author_id = $_SESSION['name'];
+                echo $author_id;
+                $title = $_POST['Title'];
+                $desc = $_POST['Description'];
+                $addr = $_POST['Address'];
+                $amenities = $_POST['amenities'];
+                $rent = $_POST['rent'];
+                $bath = $_POST['bath'];
+                $bed = $_POST['bed'];
+                $rating = null;
+                $image = null;
+                add_listing($dbHandle, $title, $addr, $desc, $rent, $bath, $bed, $image, $rating, $amenities, $author_id);
+                header("Location: ?command=search");
+                // exit();
+            }else if($_POST['actionBtn']=="Exit"){
+                echo "Asdfasdfasdfasdfsdaf";
+                header("Location: ?command=search");
+                // exit();
+            }
+        }
+    }
+
+?>
+
+
 <!DOCTYPE html>
  <html lang="en">
      <head>
@@ -13,7 +44,7 @@
      </head>  
      <body>
         <div>
-            <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
+            <div class="topbar">
                 <div class="title">
                     <span>Apartment Search and Review</span>
                 </div>
@@ -34,7 +65,7 @@
                         <img src="images/logo.png" alt="apartment search logo">
                     </div>
                 </a>
-                <div class="profile"> <!-- the user's profile picture -->
+                <div class="profile">
                     <a href="yourlistings.html">
                         <img class="profile" src="images/profile.png" alt="logo">
                     </a>
@@ -46,86 +77,57 @@
             <h1>Listing Information</h1>
 
             <div class="modal">
-                <label for="Name">Listing Title:</label>
-                <input type="text" id="Title" name="Title" placeholder="Four-Bedroom Apartment">
-                <label for="Name">Listing Description:</label>
-                <input type="text" id="Description" name="Description" placeholder="Located in Charlottesville, Virginia with a pool and in-unit washer/dryer.">
+                <form method="POST">
+                    <label for="Name">Listing Title:</label>
+                    <input type="text" id="Title" name="Title" placeholder="Four-Bedroom Apartment">
+                    <label for="Name">Listing Description:</label>
+                    <input type="text" id="Description" name="Description" placeholder="Located in Charlottesville, Virginia with a pool and in-unit washer/dryer.">
 
-                <div class="bottomhalf">
-                    <p id="addr">City of Charlottesville
-                        PO Box 911
-                        Charlottesville, VA 22902</p>
-            <div class="container">
-                <div class="d">
-                    <table class="amenities">
-                        <tr>                    
-                            <th>Amenities</th>
-                        </tr>
-                        <tr>                    
-                            <td>pool</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>parking</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>washer</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>dryer</td>
-                        </tr>
-                    </table>
-                    
+                    <div class="bottomhalf">
+                        <label for="addr">Listing Address</label>
+                        <input type="text" id="addr" name="Address" placeholder="City of Charlottesville, PO Box 911, Charlottesville, VA 22902">
+                        <div class="container">
+                            <div class="d">
+                                <label for="amenities">Amenities</label>
+                                <textarea id="amenities" name="amenities" rows="4" cols="50">List Amenities</textarea>
+                            </div>
 
-                </div>
+                            <div class="d">
+                                <table class="pbb">
+                                    <tr>                    
+                                        <td>
+                                            <label for="price">Rent Price:</label>    
+                                            <input type="text" name="rent" placeholder="$/month">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="bath"># Bathrooms:</label>    
+                                            <input type="text" name="bath" placeholder="bathrooms">
+                                        </td>
+                                    </tr>                    
+                                    <tr>                    
+                                        <td>
+                                            <label for="bed"># Bedrooms:</label>    
+                                            <input type="text" name="bed" placeholder="bedrooms">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="d">
-                    <table class="amenities">
-                        <tr>                    
-                            <th>Amenities</th>
-                        </tr>
-                        <tr>                    
-                            <td>pool</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>parking</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>washer</td>
-                        </tr>                    
-                        <tr>                    
-                            <td>dryer</td>
-                        </tr>
-                    </table>     
-                </div>
-
-                <div class="d">
-                    <table class="pbb">
-                        <tr>                    
-                            <td>Rent Price: $1750/month</td>
-                        </tr>                    
-                        <tr>                    
-                            <td># Bathrooms: 4</td>
-                        </tr>                    
-                        <tr>                    
-                            <td># Bedrooms: 4</td>
-                        </tr>                    
-
-                    </table>
-                </div>
-            </div>
-                </div>
-
-
-            <div class="actions">
-                <a href="yourlistings.html">
-                    <button type="button">Back</button>
-                </a> 
-            </div>
-            <div class="actions">
-                <a href="yourlistings.html">
-                    <button type="button">Done</button>
-                </a> 
-            </div>
+                    <!-- <div class="actions"> -->
+                        <!-- <a href="yourlistings.html">
+                            <button type="button">Back</button>
+                        </a>  -->
+                    <input type="submit" class="sbmt" value="Submit Listing" name="actionBtn" title="Submit">
+                    <input type="submit" value="Exit" name="actionBtn" title="Exit">
+                        <!-- <a href="yourlistings.html">
+                            <button type="button">Done</button>
+                        </a>  -->
+                    <!-- </div> -->
+                </form>
             </div>
             
         </main>
