@@ -10,7 +10,23 @@
          <meta name="keywords" content="info page">
         <title>Title</title>
         <link rel="stylesheet" href="../styles/yourlistings.css">
-     </head>  
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const handleAddToFavs = (event) => {
+                    const container = event.target.closest('.listingContainer');
+                    container.style.backgroundColor = 'yellow';
+                    const containerParent = container.parentElement;
+                    containerParent.prepend(container);
+                };
+
+                const favButtons = document.querySelectorAll('.add-to-favorites');
+                favButtons.forEach((button) => {
+                    button.addEventListener('click', handleAddToFavs);
+                });
+            });
+            
+        </script>
+    </head>  
      <body>
         <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
             <div class="title">
@@ -48,42 +64,54 @@
         
         <main>
             <div class="container">
-                <a href="listinfo.html">
-                    <div class="listing">
-                        <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool accesss</p>
-                    </div>  
-                </a>       
-                <a href="listinfo.html">
-                    <div class="listing">
-                        <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool accesss</p>
-                    </div>  
-                </a>    
-                <a href="listinfo.html">
-                    <div class="listing">
-                        <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool accesss</p>
-                    </div>  
-                </a>    
-                <a href="listinfo.html">
-                    <div class="listing">
-                        <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool accesss</p>
-                    </div>  
-                </a>          
+                <div class="listingContainer">
+                    <a href="listinfo.html">
+                        <div class="listing">
+                            <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                            <p class="title">1 bedroom apartment</p>
+                            <p class="locn">Charlottesville, VA</p>
+                            <p>* _ _ _ _</p>
+                            <p class="list-desc">Description, pets allowed, pool accesss</p>
+                        </div>  
+                    </a>
+                    <button class="add-to-favorites">Add to Favorites</button>       
+                </div>
+                <div class="listingContainer">
+                    <a href="listinfo.html">
+                        <div class="listing">
+                            <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                            <p class="title">2 bedroom apartment</p>
+                            <p class="locn">Charlottesville, VA</p>
+                            <p>* _ _ _ _</p>
+                            <p class="list-desc">Description, pets allowed, pool accesss</p>
+                        </div>  
+                    </a>
+                    <button class="add-to-favorites">Add to Favorites</button>       
+                </div>
+                <div class="listingContainer">
+                    <a href="listinfo.html">
+                        <div class="listing">
+                            <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                            <p class="title">3 bedroom apartment</p>
+                            <p class="locn">Charlottesville, VA</p>
+                            <p>* _ _ _ _</p>
+                            <p class="list-desc">Description, pets allowed, pool accesss</p>
+                        </div>  
+                    </a>
+                    <button class="add-to-favorites">Add to Favorites</button>       
+                </div>
+                <div class="listingContainer">
+                    <a href="listinfo.html">
+                        <div class="listing">
+                            <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                            <p class="title">4 bedroom apartment</p>
+                            <p class="locn">Charlottesville, VA</p>
+                            <p>* _ _ _ _</p>
+                            <p class="list-desc">Description, pets allowed, pool accesss</p>
+                        </div>  
+                    </a>
+                    <button class="add-to-favorites">Add to Favorites</button>       
+                </div> 
                 
             </div>            
 

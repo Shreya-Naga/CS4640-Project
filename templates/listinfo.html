@@ -10,6 +10,28 @@
          <meta name="keywords" content="info page">
         <title>Title</title>
         <link rel="stylesheet" href="../styles/listinfo.css">
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var editButton = document.getElementById("edit");
+                editButton.addEventListener('click', changeToEditMode);
+            })
+
+            function changeToEditMode() {
+                var title = document.getElementById('title');
+                var desc = document.getElementById('description');
+
+                var titleInput = document.createElement('input');
+                var descInput = document.createElement('input');
+
+                titleInput.value = title.textContent;
+                descInput.value = desc.textContent;
+
+                title.parentNode.replaceChild(titleInput, title);
+                desc.parentNode.replaceChild(descInput, desc);
+            }
+        </script>
+
      </head>  
      <body>
         <div>
@@ -48,12 +70,12 @@
             <div class="modal">
                 <div class="tophalf">
                     <div class="topleft">
-                        <img src="../images/Untitled.jpg" alt="apartment">
+                        <img src="../images/Untitled.jpeg" alt="apartment">
                     </div>
     
                     <div class="topright">
-                        <p>LISTING TITLE</p>
-                        <p class="desc">LISTING DESCTIPTION</p>
+                        <p id="title">LISTING TITLE</p>
+                        <p id="description" class="desc">LISTING DESCTIPTION</p>
                     </div>
                 </div>
 
@@ -125,6 +147,10 @@
             <div class="actions">
                 <a href="yourlistings.html">
                     <button type="button">Back</button>
+                </a> 
+                <button type="button" id="edit">Edit</button>
+                <a href="yourlistings.html">
+                    <button type="button">Done</button>
                 </a> 
             </div>
             </div>
