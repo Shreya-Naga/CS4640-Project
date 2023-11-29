@@ -92,7 +92,17 @@ div.container{
     flex-direction: row;
 }
 
+.listingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.add-to-favorites {
+    width: 50%;
+    background-color:rgb(255, 248, 216);
+    border-radius: 25px;
+}
 
 logo {
     display: flex;
