@@ -45,6 +45,9 @@ class Controller {
             case "logout":
                 $this->logout();
                 break;
+            case "update":
+                $this->update();
+                break;
             default:
                 $this->showLogin();
                 break;
@@ -63,7 +66,10 @@ class Controller {
 
     }
 
-
+    public function update(){
+        $dbHandle = $this->connector;
+        include("db/load_listing_db.php");
+    }
 
     // public function validateSearch() {
     //     if (isset($_POST["search"])) {

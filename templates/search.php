@@ -8,7 +8,7 @@
 <!DOCTYPE html>
  <html lang="en">
      <head>
-        <link rel="stylesheet" href="../styles/main.css"> <!-- link to the main.css style sheet -->
+        <link rel="stylesheet" href="styles/main.css"> <!-- link to the main.css style sheet -->
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -27,7 +27,34 @@
                 display: none;
             }
         </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
+
+            $(document).ready(function() {
+                $("#city").on("keyup", function(){
+                    validateSearch();
+                    $(".first-row").empty();
+                    // console.log($("#city").val());
+                    var query = $("#city").val();
+                    $.get("?command=update", {"query" : query}, function(response){
+                        const listings = JSON.parse(response);
+                        console.log(listings);
+                        for(let i=0; i<listings.length; i++){
+                            var html='<div class="response">'.concat(
+                                        '<img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">', 
+                                        '<p class="title">', listings[i]['title'],'</p>', 
+                                        '<p class="title">Rent: $', listings[i]['rent'], ' # Bed: ', listings[i]['num_bed'], ' # Bath: ', listings[i]['num_bath'],'</p>',
+                                        '<p class="locn">', listings[i]['addr'], '</p>', 
+                                        '<p>* _ _ _ _</p>', 
+                                        '<p class="list-desc">Description: ', listings[i]['dsc'], '</p>', 
+                                        '<p class="list-desc">Amenities: ', listings[i]['amenities'],'</p>', 
+                                        '</div>');
+                            $(".first-row").append(html);
+                        }
+                    });
+                });
+            });
+
             function validateSearch() {
                 var input = document.getElementById("city").value;
                 var validationMessage = document.getElementById("validationMessage");
@@ -68,7 +95,7 @@
             <div class="logo"> <!-- this is the site's logo -->
                 <img src="../images/logo.png" alt="apartment search logo">
             </div>
-            <form method="post">
+            <form method="get" id="#bar">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
                     <input type="search" class="form-control" name="location" id="city" placeholder="City, State">
                     <button type="submit" class="btn btn-primary" onclick="validateSearch(); return false;">Search</button>

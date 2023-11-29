@@ -40,7 +40,7 @@
          <meta name="description" content="info page">
          <meta name="keywords" content="info page">
         <title>Add Listing</title>
-        <link rel="stylesheet" href="../styles/listinfo.css">
+        <link rel="stylesheet" href="styles/listinfo.css">
 
         <script>
             // make the title input box dynamically increase in size based on the users input
@@ -51,6 +51,7 @@
                 titleInput.addEventListener('input', function() {
                     titleInput.style.width = (titleInput.value.length + 1) * 8 + 'px';
                 });
+
 
             });
             // make the description input box dynamically increase in size based on the users input
