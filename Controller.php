@@ -6,6 +6,7 @@ class Controller {
 
     private $connector;
     private $input = [];
+    private $user_id = "";
 
     public function __construct($input) {
         session_start();
@@ -44,6 +45,9 @@ class Controller {
             case "logout":
                 $this->logout();
                 break;
+            case "update":
+                $this->update();
+                break;
             default:
                 $this->showLogin();
                 break;
@@ -62,7 +66,10 @@ class Controller {
 
     }
 
-
+    public function update(){
+        $dbHandle = $this->connector;
+        include("db/load_listing_db.php");
+    }
 
     // public function validateSearch() {
     //     if (isset($_POST["search"])) {
@@ -77,6 +84,7 @@ class Controller {
 
     public function showSearch($message="") {
         $name = $_SESSION["name"];
+        $dbHandle = $this->connector;
         include("templates/search.php");        
     }
 

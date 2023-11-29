@@ -1,7 +1,14 @@
+<?php
+    require("/opt/src/CS4640-Project/db/add_listing_db.php");
+
+    $listings = json_decode(get_listings($dbHandle), true);
+
+?>
+
 <!DOCTYPE html>
  <html lang="en">
      <head>
-        <link rel="stylesheet" href="../styles/main.css"> <!-- link to the main.css style sheet -->
+        <link rel="stylesheet" href="styles/main.css"> <!-- link to the main.css style sheet -->
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -20,7 +27,34 @@
                 display: none;
             }
         </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
+
+            $(document).ready(function() {
+                $("#city").on("keyup", function(){
+                    validateSearch();
+                    $(".first-row").empty();
+                    // console.log($("#city").val());
+                    var query = $("#city").val();
+                    $.get("?command=update", {"query" : query}, function(response){
+                        const listings = JSON.parse(response);
+                        console.log(listings);
+                        for(let i=0; i<listings.length; i++){
+                            var html='<div class="response">'.concat(
+                                        '<img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">', 
+                                        '<p class="title">', listings[i]['title'],'</p>', 
+                                        '<p class="title">Rent: $', listings[i]['rent'], ' # Bed: ', listings[i]['num_bed'], ' # Bath: ', listings[i]['num_bath'],'</p>',
+                                        '<p class="locn">', listings[i]['addr'], '</p>', 
+                                        '<p>* _ _ _ _</p>', 
+                                        '<p class="list-desc">Description: ', listings[i]['dsc'], '</p>', 
+                                        '<p class="list-desc">Amenities: ', listings[i]['amenities'],'</p>', 
+                                        '</div>');
+                            $(".first-row").append(html);
+                        }
+                    });
+                });
+            });
+
             function validateSearch() {
                 var input = document.getElementById("city").value;
                 var validationMessage = document.getElementById("validationMessage");
@@ -43,16 +77,16 @@
         </script>
     </head>  
      <body style="background-color:white">
-        <div class="topbar"> <!-- this section includes the site's title and navigation bar -->
+        <div class="topbar">
             <div class="title">
                 <span>Apartment Search and Review</span>
             </div>
             <div class="nav-container">
                 <nav>
                     <ul class="nav-list">
-                        <li><a href="search.php">Apartment Search</a></li>
-                        <li><a href="newlisting.php">New Listing</a></li>
-                        <li><a href="yourlistings.php">My Listings</a></li>
+                        <li><form action="?command=search" method="post"><button type="submit">Search</button></form></li>
+                        <li><form action="?command=newListing" method="post"><button type="submit">New Listing</button></form></li>
+                        <li><form action="?command=myListing" method="post"><button type="submit">My Listings</button></form></li>
                     </ul>
                 </nav>
             </div>
@@ -61,7 +95,7 @@
             <div class="logo"> <!-- this is the site's logo -->
                 <img src="../images/logo.png" alt="apartment search logo">
             </div>
-            <form method="post">
+            <form method="get" id="#bar">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
                     <input type="search" class="form-control" name="location" id="city" placeholder="City, State">
                     <button type="submit" class="btn btn-primary" onclick="validateSearch(); return false;">Search</button>
@@ -122,67 +156,30 @@
         </div>
         <div class="apartments">
             <div class="first-row">
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                        <p class="title">4 bedroom apartment</p>
-                        <p class="locn">Charlottesville, VA</p>
-                        <p>* _ _ _ _</p>
-                        <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
+                <?php
+                    // print_r($listings[0]);
+
+                    foreach($listings as $l){
+                        echo '<div class="response">';
+                            echo '<img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">';
+                            echo '<p class="title">'.$l['title'].'</p>';
+                            echo '<p class="title">Rent: $'.$l['rent'].' # Bed: '.$l['num_bed'].' # Bath: '.$l['num_bath'].'</p>';
+                            echo '<p class="locn">'.$l['addr'].'</p>';
+                            echo '<p>* _ _ _ _</p>';
+                            echo '<p class="list-desc">Description: '.$l['dsc'].'</p>';
+                            echo '<p class="list-desc">Amenities: '.$l['amenities'].'</p>';
+                        echo '</div>';
+                    }
+                ?>
+                <!-- <div class="response">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>
                     <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-            </div>
-            <div class="second-row">
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
-                <div class="response">
-                    <img class="listingimg" src="../images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
-                    <p class="title">4 bedroom apartment</p>
-                    <p class="locn">Charlottesville, VA</p>
-                    <p>* _ _ _ _</p>
-                    <p class="list-desc">Description, pets allowed, pool access</p>
-                </div>
+                </div> -->
             </div>
         </div>
-        <br> <!-- carriage return -->
+        <br>
         <div>
             <footer class="primary-footer">
                 <small class="copyright">&copy; 2023 Shreya Nagabhirava. All rights reserved.</small>

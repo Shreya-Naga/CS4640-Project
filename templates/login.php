@@ -7,7 +7,6 @@
     $username_exists_msg = "";
     if($_SERVER['REQUEST_METHOD']=='POST'){
         if(!empty($_POST['actionBtn']) && $_POST['actionBtn']=="LOGIN"){
-            echo "asdfasdfadsfds";
             $auth = check_login($dbHandle, $_POST['name'], $_POST['password']);
             $authAttempt = 1;
             if($authAttempt){
@@ -29,7 +28,7 @@
                     $username_exists_msg="user exists";
                 }else{
                     add_user($dbHandle, $_POST['name'], $_POST['password']);
-                    $_SESSION['name'] = $res['name'];
+                    $_SESSION['name'] = $_POST['name'];
                     $username_exists_msg = "";
                     header("Location: http://localhost:8080/project/?command=search");
                     exit();
