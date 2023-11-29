@@ -8,7 +8,7 @@
 <!DOCTYPE html>
  <html lang="en">
      <head>
-        <link rel="stylesheet" href="styles/main.css"> <!-- link to the main.css style sheet -->
+        <link rel="stylesheet" href="../styles/main.css"> <!-- link to the main.css style sheet -->
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -18,7 +18,37 @@
          <meta name="keywords" content="Apartment Search and Apartment Review">
         <title>Apartment Search and Review</title>
         <!-- deployed version: https://cs4640.cs.virginia.edu/ffk9uu/project/search.html -->
-     </head>  
+        <style>
+            #validationMessage {
+                font-weight: bold;
+                margin: 10px;
+                background-color: #ffcccc;
+                padding: 10px;
+                display: none;
+            }
+        </style>
+        <script>
+            function validateSearch() {
+                var input = document.getElementById("city").value;
+                var validationMessage = document.getElementById("validationMessage");
+                validationMessage.textContent = '';
+
+                if (input !== "") {
+                    var regex = /^([A-Za-z]+|[A-Za-z\s]+,\s[A-Za-z]+)$/;
+                    if (regex.test(input)) {
+                        sessionStorage.setItem("citySearch", input);
+                        validationMessage.textContent = "This is a valid search.";
+                        // validationMessage.style.background-color = #7cfc00;
+                    } else {
+                        validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                    }
+                } else {
+                    validationMessage.textContent = "Please enter a city in either the format Charlottesville or Charlottesville, Virginia.";
+                }
+                validationMessage.style.display = validationMessage.textContent.trim() !== "" ? "block" : "none";
+            }
+        </script>
+    </head>  
      <body style="background-color:white">
         <div class="topbar">
             <div class="title">
@@ -36,24 +66,22 @@
         </div>
         <header>
             <div class="logo"> <!-- this is the site's logo -->
-                <img src="images/logo.png" alt="apartment search logo">
+                <img src="../images/logo.png" alt="apartment search logo">
             </div>
-            <form action="?command=validateSearch" method="post">
+            <form method="post">
                 <div class="searchbar"> <!-- this search bar allows users to search for a specific location and find apartments there -->
-                    <input type="search" name="location" placeholder="City, State">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <input type="search" class="form-control" name="location" id="city" placeholder="City, State">
+                    <button type="submit" class="btn btn-primary" onclick="validateSearch(); return false;">Search</button>
                 </div>
             </form>
             
             <div class="profile"> <!-- the user's profile picture -->
                 <a href="yourlistings.html">
-                    <img class="profile" src="images/profile.png" alt="logo">
+                    <img class="profile" src="../images/profile.png" alt="logo">
                 </a>
             </div>
         </header>
-        <p class="text-center fw-bold pb-3" style="color:red">
-                <?php if($message != "") echo $message; ?>
-        </p> 
+        <div id="validationMessage"></div>
         <div class="user-selections">
             <div class="rooms-dropdown"> <!-- user's can choose how many bedrooms they want their apartment search to have -->
                 <label for="bedrooms">Bedrooms:</label>
@@ -117,7 +145,6 @@
                     }
                 ?>
                 <!-- <div class="response">
-                    <img class="listingimg" src="images/condo-vs-apartment.jpeg.webp" alt="apartment pic">
                     <p class="title">4 bedroom apartment</p>
                     <p class="locn">Charlottesville, VA</p>
                     <p>* _ _ _ _</p>

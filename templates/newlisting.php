@@ -40,7 +40,30 @@
          <meta name="description" content="info page">
          <meta name="keywords" content="info page">
         <title>Add Listing</title>
-        <link rel="stylesheet" href="styles/listinfo.css">
+        <link rel="stylesheet" href="../styles/listinfo.css">
+
+        <script>
+            // make the title input box dynamically increase in size based on the users input
+            document.addEventListener("DOMContentLoaded", function () {
+                
+                var titleInput = document.getElementById('Title');
+
+                titleInput.addEventListener('input', function() {
+                    titleInput.style.width = (titleInput.value.length + 1) * 8 + 'px';
+                });
+
+            });
+            // make the description input box dynamically increase in size based on the users input
+            document.addEventListener("DOMContentLoaded", function () {
+                
+                var descriptionInput = document.getElementById('Description');
+
+                descriptionInput.addEventListePner('input', function() {
+                    descriptionInput.style.width = (descriptionInput.value.length + 1) * 10 + 'px';
+                });
+
+            });
+        </script>
      </head>  
      <body>
         <div>
@@ -62,12 +85,12 @@
             <header>
                 <a href="search.html">
                     <div class="logo">
-                        <img src="images/logo.png" alt="apartment search logo">
+                        <img src="../images/logo.png" alt="apartment search logo">
                     </div>
                 </a>
                 <div class="profile">
                     <a href="yourlistings.html">
-                        <img class="profile" src="images/profile.png" alt="logo">
+                        <img class="profile" src="../images/profile.png" alt="logo">
                     </a>
                 </div>
             </header>
